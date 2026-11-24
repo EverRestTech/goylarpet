@@ -6,7 +6,7 @@ goylarpet is a free parody extension for Polymarket in desktop Chrome. Enter an 
 
 ## Release status
 
-Version 0.4.2 is a release candidate. Cloudflare Pages deployment and Chrome Web Store submission are pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The public installation path will be the site's `/download/` page followed by the approved Chrome Web Store listing.
+Version 0.4.2 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
 
 ## Run locally
 
@@ -68,7 +68,7 @@ python3 scripts/package.py
 
 This builds a reproducible `dist/goylarpet-<version>.zip` with `manifest.json` at the root. The ZIP is for the store dashboard. Build output is ignored by Git and sits outside the Pages directory. [Listing copy and reviewer notes](store/listing.md) accompany the [store screenshot](store/screenshot-01.png).
 
-The site is ready for a Cloudflare Pages Free project linked to the confirmed public GitHub repository. Choose production branch `main`, no framework or build command, repository root, and output directory `site`. Claim the requested project name with the owner’s account. If that name is unavailable, the owner chooses the replacement before any project is created. Verify the assigned HTTPS origin in canonical, Open Graph, robots and sitemap entries before publication. [Cloudflare GitHub integration](https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/)
+Cloudflare Pages publishes the static files in `site/` to [goylarpet.pages.dev](https://goylarpet.pages.dev/) when changes reach `main` in `EverRestTech/goylarpet`. The project uses the repository root and has no build command. [Cloudflare GitHub integration](https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/)
 
 Set the approved public store listing in [the release links](site/assets/release.js) when available. Update the static status on the download page after submission or a review decision. Chrome Web Store handles installs and updates.
 
