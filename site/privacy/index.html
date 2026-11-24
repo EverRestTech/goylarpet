@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy and permissions — goylarpet</title>
+  <meta name="description" content="How goylarpet handles visible Polymarket balances and profit or loss, stores settings locally and uses Chrome permissions">
+  <link rel="canonical" href="https://goylarpet.pages.dev/privacy/">
+  <link rel="icon" href="/assets/mark.png"><link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast"><div class="shell bar"><a class="brand" href="/"><img src="/assets/mark.png" width="32" height="32" alt="">goylarpet</a><nav aria-label="Main navigation"><a href="/#support">Support</a><a class="nav-install" href="/download/">Install <span aria-hidden="true">↗</span></a></nav></div></header>
+  <main id="main" class="privacy light-section"><div class="shell prose">
+    <h1>Privacy and permissions</h1>
+    <p class="intro">goylarpet processes visible balance text on your device<br>The extension sends no data to the author, analytics services or any other server</p>
+    <h2>Balances and profit or loss</h2><p>The adjustments you enter for Portfolio, Cash and each Profit/Loss period stay in <code>chrome.storage.local</code> in your Chrome profile<br>Chrome removes this data when you uninstall the extension</p>
+    <p>While a tab is enabled, its current site text stays in memory so that Disable can restore it<br>Chrome’s in-memory session storage keeps the tab’s active settings during navigation<br>Reloading the page ends the mode</p>
+    <p>When you follow a Polymarket link in that tab, goylarpet briefly saves the selected field names and a browser-generated history entry ID in the tab’s Polymarket session storage<br>The next page reads and removes this hint so it can cover those fields while Chrome supplies your settings<br>Your adjustments stay in extension storage</p>
+    <h2>Chrome permissions</h2><dl class="permissions">
+      <div><dt>activeTab</dt><dd>Clicking the extension gives it temporary access to the current tab<br>It checks that the page is on polymarket.com</dd></div>
+      <div><dt>scripting</dt><dd>Runs the bundled balance reader and text formatter in that tab</dd></div>
+      <div><dt>storage</dt><dd>Keeps your last adjustments locally between sessions</dd></div>
+    </dl>
+    <h2>Accounts and payments</h2><p>Sign-in takes place on Polymarket<br>goylarpet does not access credentials, place orders, connect to wallets or transfer funds<br>Fictional balances affect the text you see in the enabled tab</p>
+    <h2>This website</h2><p>The portfolio simulator runs in your browser<br>The site sets no cookies and includes no analytics<br>Copy address copies the selected public receiving address to your clipboard<br>You initiate any voluntary transfer from your own wallet or exchange</p>
+    <a class="card-link" href="/download/">Installation guide <span aria-hidden="true">↗</span></a>
+  </div></main>
+  <footer class="foot"><div class="shell foot-row"><a class="brand" href="/"><img src="/assets/mark.png" width="26" height="26" alt="">goylarpet</a><nav aria-label="Footer"><a href="https://github.com/EverRestTech/goylarpet">GitHub</a><a href="/#support">Support</a></nav></div></footer>
+</body>
+</html>

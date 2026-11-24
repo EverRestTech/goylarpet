@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>goylarpet</title>
+  <link rel="stylesheet" href="popup.css">
+  <script defer src="locales.js"></script>
+  <script defer src="money.js"></script>
+  <script defer src="popup.js"></script>
+</head>
+<body>
+  <header>
+    <div class="identity"><img src="icons/48.png" width="32" height="32" alt=""><h1>goylarpet</h1></div>
+    <span id="mode" class="mode" role="status">Off</span>
+  </header>
+  <main>
+    <form id="settings">
+      <fieldset disabled>
+        <legend>Balance adjustments</legend>
+        <div id="amounts" class="amounts"></div>
+        <p id="balance-help" class="help">Add your amount to the real Portfolio or Cash balance</p>
+        <section aria-labelledby="pnl-title">
+          <h2 id="pnl-title">Profit/Loss adjustments</h2>
+          <div id="ranges" class="amounts"></div>
+          <p id="pnl-help" class="help">Open your portfolio to see its time ranges</p>
+        </section>
+        <div class="actions">
+          <button class="primary" type="submit">Enable in this tab</button>
+          <button id="disable" type="button" disabled>Disable</button>
+        </div>
+      </fieldset>
+    </form>
+    <p id="status" role="status">Checking this tab…</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><title>goylarpet · local portfolio fixture</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { font: 16px/1.45 system-ui, sans-serif; background: #f6f5ed; color: #191b19; }
+    * { box-sizing: border-box; } body { margin: 0; }
+    header, .metrics, .controls { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; }
+    header { padding: 15px 22px; background: #fff; border-bottom: 1px solid #cbcec1; }
+    header b { margin-right: auto; } header a { color: inherit; text-decoration: none; }
+    header span, dt { display: block; color: #5a6158; font-size: 13px; }
+    main { max-width: 750px; padding: 30px 24px; }
+    h1 { margin: 4px 0 18px; font-size: 32px; letter-spacing: -.05em; }
+    .metrics { align-items: stretch; gap: 12px; }
+    dl { flex: 1; margin: 0; padding: 15px; background: #e4dbc9; border-radius: 6px; }
+    dl:first-child { background: #d8c9f3; } dd { margin: 3px 0 0; font-size: 25px; font-weight: 650; }
+    .controls { margin: 15px 0; gap: 9px; } button { padding: 7px 12px; cursor: pointer; }
+    .stamp { margin: 0; font: 600 12px/1.4 ui-monospace, monospace; letter-spacing: .055em; }
+  </style>
+</head>
+<body>
+  <header><b>Local test page</b><a href="/portfolio"><span>Portfolio</span><strong data-copy="portfolio">$100</strong></a><div><span>Cash</span><strong data-copy="cash">$40.00</strong></div></header>
+  <main>
+    <p class="stamp">PARODY · NO REAL MONEY</p><h1>Simulated portfolio</h1>
+    <section aria-label="Portfolio summary" class="metrics">
+      <dl><dt>Portfolio</dt><dd data-copy="portfolio">$100</dd></dl>
+      <dl><dt>Cash</dt><dd data-copy="cash">$40.00</dd></dl>
+    </section>
+    <div class="controls"><button data-delta="-15">Simulate −$15</button><button data-delta="25">Simulate +$25</button></div>
+    <section class="pnl"><div><h2>Profit/Loss</h2><div role="group"><button type="button" aria-pressed="true">1D</button><button type="button" aria-pressed="false">1W</button><button type="button" aria-pressed="false">1M</button><button type="button" aria-pressed="false">1Y</button><button type="button" aria-pressed="false">YTD</button><button type="button" aria-pressed="false">ALL</button></div></div><p data-pnl>+$5.00</p></section>
+    <table><caption>Unrelated position</caption><tbody><tr><th>Cash</th><td>$12.00</td></tr></tbody></table>
+    <form><label>Order amount <input value="$19"></label></form>
+  </main>
+  <script>
+    let value = 100;
+    for (const button of document.querySelectorAll('[data-delta]')) {
+      button.onclick = () => {
+        value += Number(button.dataset.delta);
+        for (const display of document.querySelectorAll('[data-copy="portfolio"]')) {
+          display.firstChild.data = '$' + value;
+        }
+      };
+    }
+  </script>
+</body>
+</html>

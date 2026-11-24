@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>goylarpet — Polymarket Parody Portfolio</title>
+  <meta name="description" content="Add a fictional amount to your Polymarket balances or profit and loss with goylarpet, a free Chrome extension that follows each real gain and loss">
+  <link rel="canonical" href="https://goylarpet.pages.dev/">
+  <meta property="og:title" content="goylarpet — Polymarket Parody Portfolio">
+  <meta property="og:description" content="In the timeline where I held — a free, local-only parody for desktop Chrome">
+  <meta property="og:type" content="website"><meta property="og:url" content="https://goylarpet.pages.dev/">
+  <meta property="og:image" content="https://goylarpet.pages.dev/assets/share.png">
+  <meta property="og:image:alt" content="goylarpet portfolio simulator. PARODY · NO REAL MONEY">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#191b19">
+  <link rel="icon" href="/assets/mark.png"><link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/demo.js"></script>
+  <script type="module" src="/assets/support.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast"><div class="shell bar">
+    <a class="brand" href="/" aria-label="goylarpet home"><img src="/assets/mark.png" alt="" width="32" height="32">goylarpet</a>
+    <nav aria-label="Main navigation"><a class="wide-link" href="#mechanics">How it works</a><a href="#support">Support</a><a class="nav-install" href="/download/">Install <span aria-hidden="true">↗</span></a></nav>
+  </div></header>
+  <main id="main">
+    <section class="hero"><div class="shell hero-grid">
+      <div class="hero-copy">
+        <h1 class="eyebrow title-kicker">goylarpet — Polymarket Parody Portfolio</h1>
+        <p class="headline">In the timeline<br>where <em>I held</em></p>
+        <p class="lead">Add a fictional amount to your Polymarket balances or profit and loss<br>Your totals follow each real gain and loss</p>
+        <div class="hero-actions"><a class="button lime" href="/download/">Get goylarpet <span aria-hidden="true">↗</span></a><a class="underlink" href="#mechanics">How it works <span aria-hidden="true">↓</span></a></div>
+        <p class="compat">Free extension <b aria-hidden="true">/</b> Desktop Chrome</p>
+      </div>
+      <div class="demo-stage" id="demo">
+        <div class="paper-shadow"><section class="receipt" aria-labelledby="sim-title">
+          <div class="receipt-head"><span class="mini-mark" aria-hidden="true">⑂</span><h2 id="sim-title">Portfolio simulator</h2></div>
+          <div class="receipt-value">
+            <p class="micro">Fictional balance</p>
+            <output id="fiction" class="balance">$1,000</output>
+            <div class="stamp">PARODY · NO REAL MONEY</div>
+          </div>
+          <div class="plot"><canvas id="chart" aria-label="Two simulated balance histories separated by a fixed 900 dollars" role="img"></canvas></div>
+          <dl class="quote"><div><dt><i class="key real"></i>Real balance</dt><dd id="real">$100</dd></div><div><dt><i class="key gap"></i>Your adjustment</dt><dd>+$900</dd></div></dl>
+          <div class="trade"><span>Simulate a trade</span><button type="button" id="loss" aria-label="Simulate a 15 dollar loss">−$15</button><button type="button" id="gain" aria-label="Simulate a 25 dollar gain">+$25</button></div>
+          <span id="trade-status" class="sr" role="status"></span>
+        </section></div>
+      </div>
+    </div></section>
+    <section class="light-section" id="mechanics"><div class="shell">
+      <h2 class="section-title">How it works</h2>
+      <ol class="steps">
+        <li><h3>Choose your amounts</h3><p>Open your Polymarket portfolio and click goylarpet<br>Enter an amount to add to Portfolio, Cash or any Profit/Loss period<br>Use a minus sign to subtract</p></li>
+        <li><h3>Let the market move</h3><p>Choose <strong>Enable in this tab</strong><br>With a $900 adjustment, a $100 balance reads $1,000<br>After a $15 loss you see $985</p></li>
+        <li><h3>Return to your portfolio</h3><p>Click <strong>Disable</strong> to restore the latest site amounts<br>Reloading the tab also ends the parody</p></li>
+      </ol>
+    </div></section>
+    <section class="support-section" id="support"><div class="shell support-grid">
+      <div><h2 class="section-title">Support the author</h2><p>Every feature is free<br>If this made you laugh, you can leave a tip</p></div>
+      <div class="support-panel">
+        <p id="no-address">The author hasn’t confirmed a receiving address yet</p>
+        <div id="donations" hidden>
+          <div class="selectors"><label>Token<select id="token"></select></label><label>Network<select id="network"></select></label></div>
+          <h3 id="pair"></h3><code id="address"></code>
+          <p id="send-note"></p><button id="copy" class="button dark" type="button">Copy address</button>
+          <span id="copy-status" role="status"></span>
+        </div>
+      </div>
+    </div></section>
+  </main>
+  <footer class="foot"><div class="shell foot-row"><a class="brand" href="/"><img src="/assets/mark.png" width="26" height="26" alt="">goylarpet</a><nav aria-label="Footer"><a href="https://github.com/EverRestTech/goylarpet">GitHub</a><a href="/download/">Install</a><a href="/privacy/">Privacy</a></nav></div></footer>
+</body>
+</html>

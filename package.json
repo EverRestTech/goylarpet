@@ -1,0 +1,11 @@
+{
+  "name": "goylarpet",
+  "private": true,
+  "scripts": {
+    "test": "node --test --test-concurrency=1 tests/*.test.cjs",
+    "package": "python3 scripts/package.py"
+  },
+  "devDependencies": {
+    "playwright-core": "1.62.1"
+  }
+}
