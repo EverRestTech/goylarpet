@@ -4,7 +4,7 @@ goylarpet is a free parody extension for Polymarket in desktop Chrome. Enter an 
 
 ## Release status
 
-Version 0.4.6 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
+Version 0.5.0 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
 
 ## Run locally
 
@@ -77,5 +77,7 @@ Set the approved public store listing in [the release links](site/assets/release
 Only the author’s confirmed receiving addresses belong in [the pair list](site/assets/pairs.js). Each entry has an independent address and confirmation flag. The browser tests select and copy all ten pairs using deliberately non-payable test strings served in memory.
 
 The locally hosted token illustrations come from [Cryptocurrency Icons](https://github.com/spothq/cryptocurrency-icons) (CC0).
+
+The popup and site use lime (`#DCFF00`) and black (`#000000`) from the [Gold Apple logo palette in Trace Logos](https://trace-logos.ru/logos/market/goldenapple/). The dark grey surfaces and text colours are part of goylarpet’s theme. The [goylarpet mark](site/assets/mark.svg) is the source for the PNG icons.
 
 After the owner grants Search Console access, add the actual HTTPS origin as a URL-prefix property, place Google’s issued HTML verification file at the root of `site/`, deploy, verify and submit `sitemap.xml`.

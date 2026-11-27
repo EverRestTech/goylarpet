@@ -45,7 +45,7 @@ test('first frames on a new document use this tab’s profile even when the work
   await popup.fill('#amount-portfolio', '1000');
   await popup.fill('#amount-pnl_1d', '200');
   await popup.click('button[type=submit]');
-  await until(() => popup.text('#mode').then(v => v === 'On in tab'), 'Enable did not finish');
+  await until(() => popup.text('#mode').then(v => v === 'On'), 'Enable did not finish');
   await popup.close();
   const adjusted = ['$1,100', '+$205'], site = ['$100', '+$5.00'];
   const expectFrames = async (tab, expected) => {
@@ -123,7 +123,7 @@ async function enabledPortfolio(t) {
   await popup.fill('#amount-pnl_ytd', '200');
   await popup.fill('#amount-pnl_all', '100000000');
   await popup.click('button[type=submit]');
-  await until(() => popup.text('#mode').then(text => text === 'On in tab'), 'Enable failed');
+  await until(() => popup.text('#mode').then(text => text === 'On'), 'Enable failed');
   assert.equal(await headline.textContent(), '$175.82');
   await popup.close();
   await portfolio.evaluateAll(els => els.forEach(el => { el.firstChild.data = '$0.23'; }));

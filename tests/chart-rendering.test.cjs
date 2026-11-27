@@ -28,7 +28,7 @@ async function allTime(t) {
     const popup = await open();
     await popup.fill('#amount-pnl_all', adjustment);
     await popup.click('button[type=submit]');
-    await until(() => popup.text('#mode').then(value => value === 'On in tab'), 'Could not enable');
+    await until(() => popup.text('#mode').then(value => value === 'On'), 'Could not enable');
     await popup.close();
   }
   async function recordFrames() {

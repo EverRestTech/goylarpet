@@ -103,7 +103,7 @@ test('a site write immediately after Enable uses the visible range’s original 
   const popup = await app.open(page);
   await popup.fill('#amount-pnl_1d','10');
   await popup.click('button[type=submit]');
-  await until(() => popup.text('#mode').then(v => v === 'On in tab'), 'Could not enable');
+  await until(() => popup.text('#mode').then(v => v === 'On'), 'Could not enable');
   await headline.evaluate(el => { el.firstChild.data = '-$22.18'; });
   await until(() => headline.textContent().then(v => v === '-$12.18'), 'The first genuine gain after Enable was lost');
   await popup.disable();
@@ -134,7 +134,7 @@ test('a localized range strip and split negative amount survive delayed initiali
   await popup.fill('#amount-pnl_1d','100');
   await popup.fill('#amount-pnl_6h','-10');
   await popup.click('button[type=submit]');
-  await until(() => popup.text('#mode').then(v => v === 'On in tab'), 'Could not enable while chart was loading');
+  await until(() => popup.text('#mode').then(v => v === 'On'), 'Could not enable while chart was loading');
   await popup.close();
   const value = page.locator('[data-pnl]');
   await value.evaluate(el => {
@@ -234,7 +234,7 @@ test('an upgrade adds the original Portfolio, Cash and YTD entries and discards 
   await expect('$175.82');
   assert.equal(await page.locator('header [data-copy="portfolio"]').textContent(), '$1,085');
   assert.equal(await page.locator('header [data-copy="cash"]').textContent(), '$40');
-  await until(() => popup.text('#mode').then(v => v === 'On in tab'), 'Enable did not finish');
+  await until(() => popup.text('#mode').then(v => v === 'On'), 'Enable did not finish');
   const saved = await popup.evaluate('(async()=>(await chrome.storage.local.get("last")).last)()');
   assert.deepEqual(saved.amounts, old.amounts);
   assert.deepEqual(saved.offsets, old.amounts);
@@ -245,7 +245,7 @@ test('an upgrade adds the original Portfolio, Cash and YTD entries and discards 
   await ytd('-$23.18');
   await expect('$176.82');
   popup = await app.open(page);
-  assert.equal(await popup.text('#mode'), 'On in tab');
+  assert.equal(await popup.text('#mode'), 'On');
   await popup.fill('#amount-pnl_ytd', '-25');
   await popup.click('button[type=submit]');
   await expect('-$48.18');
@@ -266,7 +266,7 @@ test('a slow panel and a quick range change apply the adjustment only to the mat
   await popup.fill('#amount-pnl_1w','100');
   await popup.fill('#amount-pnl_1m','20');
   await popup.click('button[type=submit]');
-  await until(() => popup.text('#mode').then(v => v === 'On in tab'), 'Could not enable');
+  await until(() => popup.text('#mode').then(v => v === 'On'), 'Could not enable');
   await popup.close();
   // The old visible panel remains mounted beyond the value-settling window.
   const oldText = await chart.evaluate(async el => {
@@ -301,7 +301,7 @@ test('switching ranges in one tab preserves the last adjustments chosen in anoth
   let popup = await app.open(first);
   await popup.fill('#amount-pnl_1w','-25');
   await popup.click('button[type=submit]');
-  await until(() => popup.text('#mode').then(v => v === 'On in tab'), 'First tab did not enable');
+  await until(() => popup.text('#mode').then(v => v === 'On'), 'First tab did not enable');
   await popup.close();
   const second = await ctx.newPage();
   await second.goto('https://polymarket.com/portfolio?tab=b');
@@ -454,7 +454,7 @@ test('the English popup applies all six chart periods in each mapped site langua
     const ranges = [['1d', -1000], ['1w', 3500], ['1m', 0], ['1y', -1425], ['ytd', 20000], ['all', 12345678]];
     for (const [id, cents] of ranges) await popup.fill('#amount-pnl_' + id, money.decimal(cents));
     await popup.click('button[type=submit]');
-    await until(async () => await popup.text('#mode') === 'On in tab', lang + ' failed to apply');
+    await until(async () => await popup.text('#mode') === 'On', lang + ' failed to apply');
     for (const [id, expected] of [['portfolio', 155025], ['cash', -5025]]) {
       const copies = await page.locator('[data-copy="' + id + '"]').allTextContents();
       assert.deepEqual(copies.map(text => money.readSite(text, lang)), [expected, expected], lang + ' ' + id);

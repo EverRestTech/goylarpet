@@ -185,7 +185,7 @@ test('YTD and all other selected periods survive replacement of the toolbar and 
     await expect(usd(adjusted - 100));
   }
   const popup = await open();
-  assert.equal(await popup.text('#mode'), 'On in tab');
+  assert.equal(await popup.text('#mode'), 'On');
   assert.equal(await popup.text('#status'), '');
   const offsets = await popup.evaluate('(async() => (await chrome.storage.local.get("last")).last.offsets)()');
   for (const [i, id] of ids.entries()) assert.equal(offsets['pnl_' + id], adjustments[i] * 100, id);
@@ -203,7 +203,7 @@ test('a negative YTD split into a signed currency symbol, whole dollars and cent
   await headline.locator('b').evaluate(el => { el.firstChild.data = '25'; });
   await expect('$174.82');
   const popup = await open();
-  assert.equal(await popup.text('#mode'), 'On in tab');
+  assert.equal(await popup.text('#mode'), 'On');
   assert.equal(await popup.text('#status'), '');
   await popup.click('#disable');
   await expect('−$25.18');

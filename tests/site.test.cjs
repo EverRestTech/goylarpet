@@ -7,7 +7,7 @@ const { browser } = require('./browser.cjs');
 const origin = 'https://goylarpet.pages.dev';
 const repository = 'https://github.com/EverRestTech/goylarpet';
 const directory = path.resolve(__dirname, '../site');
-const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.png': 'image/png',
+const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.png': 'image/png', '.svg': 'image/svg+xml',
   '.xml': 'application/xml', '.txt': 'text/plain' };
 
 test('static site, release links, SEO and donation clipboard', { timeout: 45000 }, async t => {

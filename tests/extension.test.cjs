@@ -52,7 +52,7 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     await popup.fill('#amount-portfolio', '+1,000');
     await popup.fill('#amount-cash', '0');
     await submit();
-    await waitText('#mode', 'On in tab');
+    await waitText('#mode', 'On');
     await expectText(page, portfolio, '$1,100');
     await expectText(page, cash, '$40');
     assert.equal(await page.locator(portfolio).count(), 2);
@@ -151,7 +151,7 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     await writeAll(portfolio, ['$72']);
     await expectText(page, portfolio, '$1,072');
     popup = await app.open(page);
-    assert.equal(await popup.text('#mode'), 'On in tab');
+    assert.equal(await popup.text('#mode'), 'On');
     await popup.close();
   });
 
@@ -164,7 +164,7 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     await popup.fill('#amount-cash', '');
     await popup.fill('#amount-portfolio', '500');
     await submit();
-    await waitText('#mode', 'On in tab');
+    await waitText('#mode', 'On');
     await waitText('#status', 'waiting for a labelled balance');
     await fresh.locator('.metrics').evaluate(el => { el.hidden = false; el.style.display = ''; });
     await expectText(fresh, 'main ' + portfolio, '$600');

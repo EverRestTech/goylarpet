@@ -65,7 +65,7 @@ function loadSettings(profile) {
   }
 }
 function show(result) {
-  const label = result.enabled ? 'On in tab' : 'Off';
+  const label = result.enabled ? 'On' : 'Off';
   if (mode.textContent !== label) mode.textContent = label;
   mode.classList.toggle('on', result.enabled);
   disable.disabled = !result.enabled;
