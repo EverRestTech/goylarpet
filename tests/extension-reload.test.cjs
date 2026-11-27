@@ -24,7 +24,7 @@ test('first frames on a new document use this tab’s profile even when the work
     addEventListener('pagehide', () => {
       sessionStorage.setItem('fixture:departure', sessionStorage.getItem('goylarpet:next') || '');
     });
-    const coldStart = location.search === '?cold' && performance.getEntriesByType('navigation')[0]?.type !== 'reload';
+    const coldStart = location.search === '?cold';
     window.firstBalances = new Promise(resolve => {
       const frames = [];
       function sample() {
@@ -80,9 +80,20 @@ test('first frames on a new document use this tab’s profile even when the work
   await expectFrames(other, site);
   await other.close();
   await page.bringToFront();
+  await suspendWorker(await context.newCDPSession(page), worker.url());
   await page.reload();
-  await expectFrames(page, site);
+  await expectFrames(page, adjusted);
+  await Promise.all([
+    page.waitForNavigation(),
+    cd.send('Page.reload', { ignoreCache: true })
+  ]);
+  await expectFrames(page, adjusted);
   await page.goto(url + '?after-reload');
+  await expectFrames(page, adjusted);
+  const enabled = await app.open(page);
+  await enabled.disable();
+  await enabled.close();
+  await page.reload();
   await expectFrames(page, site);
 });
 

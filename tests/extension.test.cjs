@@ -123,7 +123,7 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     await expectText(page, portfolio, '$91');
   });
 
-  await t.test('reload turns off the mode and the last settings reuse their stored offsets', async () => {
+  await t.test('navigation, tab switching and reload keep following the latest real balance', async () => {
     await submit();
     await expectText(page, portfolio, '$1,091');
     await popup.close();
@@ -132,13 +132,24 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     await expectText(page, 'main ' + portfolio, '$100');
     await page.goto('https://polymarket.com/portfolio?tab=one');
     await expectText(page, portfolio, '$1,100');
+    await page.getByRole('button', { name: 'Simulate −$15' }).click();
+    await expectText(page, portfolio, '$1,085');
+    const other = await context.newPage();
+    await other.goto('https://polymarket.com/portfolio?background-test');
+    await other.bringToFront();
+    await expectText(other, portfolio, '$100');
     await page.reload();
-    await expectText(page, portfolio, '$100');
+    await expectText(page, portfolio, '$1,085');
+    await page.bringToFront();
+    await page.getByRole('button', { name: 'Simulate +$25' }).click();
+    await expectText(page, portfolio, '$1,110');
+    await page.reload();
+    await expectText(page, portfolio, '$1,110');
+    await other.close();
     await writeAll(portfolio, ['$72']);
-    popup = await app.open(page);
-    assert.equal(await popup.text('#mode'), 'Off');
-    await submit();
     await expectText(page, portfolio, '$1,072');
+    popup = await app.open(page);
+    assert.equal(await popup.text('#mode'), 'On in tab');
     await popup.close();
   });
 
@@ -180,6 +191,7 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     await expectText(page, cash, '$140');
     await popup.click('#disable');
     await expectText(page, portfolio, '$72');
+    await second.reload();
     await expectText(second, portfolio, '$1,000,100');
     await popup.close();
     popup = await app.open(second);
@@ -212,7 +224,7 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     await page.goto('https://polymarket.com/portfolio?tab=returned');
     popup = await app.open(page);
     assert.equal(await popup.text('#mode'), 'Off');
-    await expectText(page, portfolio, '$100');
+    await expectText(page, portfolio, '$110');
     await popup.close();
   });
 

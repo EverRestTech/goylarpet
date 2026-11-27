@@ -33,13 +33,18 @@
     <form><label>Order amount <input value="$19"></label></form>
   </main>
   <script>
-    let value = 100;
+    let value = Number(sessionStorage.getItem('fixture:balance') ?? 100);
+    function showBalance() {
+      for (const display of document.querySelectorAll('[data-copy="portfolio"]')) {
+        display.firstChild.data = '$' + value;
+      }
+    }
+    showBalance();
     for (const button of document.querySelectorAll('[data-delta]')) {
       button.onclick = () => {
         value += Number(button.dataset.delta);
-        for (const display of document.querySelectorAll('[data-copy="portfolio"]')) {
-          display.firstChild.data = '$' + value;
-        }
+        sessionStorage.setItem('fixture:balance', value);
+        showBalance();
       };
     }
   </script>

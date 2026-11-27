@@ -243,10 +243,9 @@ test('an upgrade adds the original Portfolio, Cash and YTD entries and discards 
   await popup.close();
   await page.reload();
   await ytd('-$23.18');
-  popup = await app.open(page);
-  assert.equal(await popup.text('#mode'), 'Off');
-  await popup.click('button[type=submit]');
   await expect('$176.82');
+  popup = await app.open(page);
+  assert.equal(await popup.text('#mode'), 'On in tab');
   await popup.fill('#amount-pnl_ytd', '-25');
   await popup.click('button[type=submit]');
   await expect('-$48.18');

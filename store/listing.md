@@ -16,7 +16,7 @@ goylarpet gives your Polymarket portfolio a fictional balance in one desktop Chr
 
 If your portfolio is worth $100 and you enter 900, you see $1,000. When the site’s balance drops to $85, you see $985 in that tab.
 
-If your real Year to date result is −$24.18, entering 200 shows $175.82. A further $1 loss brings it to $174.82. Select Disable to restore Polymarket’s latest displayed figures. Reloading the tab also ends the mode. All features are free.
+If your real Year to date result is −$24.18, entering 200 shows $175.82. A further $1 loss brings it to $174.82. Reload the page, browse Polymarket, or switch tabs and return. Your adjustments keep following the latest figures in the enabled tab. Select Disable to restore the real figures. All features are free.
 
 goylarpet is an independent parody. It has no affiliation with Polymarket. It cannot execute trades, change an account balance or transfer money.
 
@@ -34,7 +34,7 @@ The extension’s sole purpose is to display fictional USD balances and portfoli
 - **scripting** runs that code in the current top-level document. It discovers balance displays, observes site updates and restores the latest source text on Disable.
 - **storage** retains the adjustments for Portfolio, Cash and each P&L period locally. Session storage keeps a tab’s active configuration between documents until the mode ends.
 
-On same-tab navigation, the outgoing document passes the selected field names and a browser-generated history entry ID through the tab's Polymarket session storage. The next document consumes this hint to cover those fields as they appear. Amounts and offsets stay in Chrome extension storage.
+On reloads and same-tab navigation within Polymarket, the outgoing document passes the selected field names and a browser-generated history entry ID through the tab's Polymarket session storage. The next document consumes this hint to cover those fields as they appear. Amounts and offsets stay in Chrome extension storage.
 
 The extension handles visible financial balance text locally. It transmits no user data and contains no remote executable code, analytics or advertising. Credentials, wallet keys, payment details and order controls are outside its scope.
 
@@ -43,8 +43,8 @@ The extension handles visible financial balance text locally. It transmits no us
 1. In desktop Chrome, open an authorized Polymarket session with visible balances on the portfolio page and invoke goylarpet. The popup initially shows **Off**.
 2. Enter 900 for Portfolio and −5 for Cash. Enter a negative value for the selected Profit/Loss period and a positive value for another. Select **Enable in this tab**. Portfolio should increase by $900 and Cash should decrease by $5 from their respective site values.
 3. Close the popup and switch between the two periods. Check that each headline equals the site's original total plus the entry for that period. Move the pointer off the plot to read the current total, then explore historical points. The headline should hold its last confirmed total until the period’s actual total changes.
-4. Follow another Polymarket link in this tab. Supported header balances keep their offsets. A second tab starts with the mode off. Select **Disable** in the first tab to restore its latest site values.
-5. Reapply the values and reload the page. The mode is off. The popup remembers the last amounts locally and lets you apply them again.
+4. Follow another Polymarket link in this tab, then reload. Supported balances still show their current site values plus the same adjustments. Open Polymarket in a second tab. It starts with the mode off. Return to the first tab and confirm that it is still on.
+5. Select **Disable** in the first tab. The latest site values return immediately. Reload again and confirm that the mode stays off.
 6. Run `npm test` from the source checkout to exercise gains, losses, locale changes and DOM replacements on synthetic pages.
 
 The 1280 × 800 listing image shows the enabled popup with synthetic adjustment amounts, the Support the author link and the parody disclosure. A 440 × 280 promotional tile carries the same disclosure. The 128 × 128 store icon is included in the ZIP. [Chrome Web Store image guidance](https://developer.chrome.com/docs/webstore/images)

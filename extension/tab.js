@@ -279,7 +279,7 @@
   }
   function pageSwap(event) {
     const next = event.activation;
-    if (next?.entry?.url && next.navigationType !== 'reload' && new URL(next.entry.url).origin === location.origin) {
+    if (next?.entry?.url && new URL(next.entry.url).origin === location.origin) {
       rememberFields(next.from);
     }
   }

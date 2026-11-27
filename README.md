@@ -4,7 +4,7 @@ goylarpet is a free parody extension for Polymarket in desktop Chrome. Enter an 
 
 ## Release status
 
-Version 0.4.3 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
+Version 0.4.4 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
 
 ## Run locally
 
@@ -25,11 +25,13 @@ npm test
 
 The tests launch a temporary Chrome profile, load the production manifest, open the actual action popup and fulfill portfolio navigations from a local fixture. DNS resolution is disabled in that profile. To use an existing Chrome for Testing binary, set `CHROME_FOR_TESTING` to its executable path.
 
-To record a demo, run `npm run demo` after the browser setup above. It opens a separate Chrome for Testing window with the extension and a local portfolio. Open goylarpet from the extensions menu, enter 900 under Portfolio and click **Enable in this tab**. Close the popup. Click **Simulate −$15**, then **Simulate +$25** to see $1,000 change to $985 and then $1,010. Use **Disable** to reveal the underlying $110. Close the recording tab when you finish.
+To record a demo, run `npm run demo` after the browser setup above. It opens a separate Chrome for Testing window with the extension and a local portfolio. Open goylarpet from the extensions menu, enter 900 under Portfolio and click **Enable in this tab**. Close the popup. Click **Simulate −$15** to see $1,000 drop to $985. Reload the tab. It still shows $985. Click **Simulate +$25** to see $1,010, then **Disable** to reveal the underlying $110. Close the recording tab when you finish.
 
 ## Using the popup
 
 Open Portfolio on Polymarket and click goylarpet. For Portfolio, Cash or any of the six Profit/Loss periods, enter the amount to add to the current site value. A negative entry subtracts from it. Leave a field empty to skip it, then click **Enable in this tab**.
+
+The mode stays on in that tab when you reload, follow a Polymarket link or switch to another tab and back. Each Polymarket tab has its own on/off state and adjustments. Click **Disable** to restore the latest site values and turn the mode off for that tab.
 
 If the site's Year to date total is −$24.18 and you enter 200, the chart headline shows $175.82. If the total falls to −$25.18, the headline shows $174.82. Enabling saves the adjustments for all fields you filled in, including periods you have yet to open.
 
@@ -46,7 +48,7 @@ Large Profit/Loss totals use the full currency format whenever it fits beside th
 - [Language map](extension/locales.js) lists portfolio, cash, Profit/Loss and interval labels. It covers English, Russian, Spanish, French, German, Italian, Portuguese, Dutch, Polish, Ukrainian, Turkish, Japanese, Korean, simplified and traditional Chinese, Vietnamese, Indonesian, Malay, Hindi, Arabic, Thai, Hebrew, Romanian, Swedish and Persian. Localized controls and controls left in English share stable period identifiers.
 - [DOM rules](extension/balances.js) associate localized labels with amounts in the header, portfolio summary and Profit/Loss chart. The Russian header’s «Наличные» and the summary’s «Доступно для торговли» both map to Cash in the English popup. The popup lists one signed Profit/Loss adjustment per chart period in a single column.
 - [Tab controller](extension/tab.js) discovers replacement regions, observes text within supported regions and changes only `Text.data`. It disconnects the observer during its own writes and retains the exact latest site string for each copy. Disable restores those strings and stops observation.
-- [Navigation worker](extension/navigation.js) and [document startup](extension/document-start.js) resume an enabled tab on same-origin links. Chrome starts the reader at `document_start` under the existing tab grant. A reload ends the mode. Single-page navigation is handled in the document.
+- [Navigation worker](extension/navigation.js) and [document startup](extension/document-start.js) resume an enabled tab on page reloads and same-origin links. Chrome starts the reader at `document_start` under the existing tab grant. Single-page navigation is handled in the document.
 
 ## Permissions and local data
 
@@ -56,7 +58,7 @@ Large Profit/Loss totals use the full currency format whenever it fits beside th
 | `scripting` | Runs the packaged balance reader and controller in Chrome’s isolated world. |
 | `storage` | Saves the entered adjustments for Portfolio, Cash and individual chart periods in `chrome.storage.local`. |
 
-Original strings live in document memory. The active profile and Chrome's tab and document identifiers live in `chrome.storage.session`. Disable, reload, tab closure and loss of access end the session. For a same-tab link, the outgoing page briefly places the configured field names and a browser-generated history entry ID in the tab’s Polymarket `sessionStorage`. The incoming page consumes that hint immediately so it can cover those fields while the worker checks the tab and supplies the adjustments. All amounts stay in extension storage.
+Original strings live in document memory. The active profile and Chrome's tab and document identifiers live in `chrome.storage.session`. Disable, tab closure and loss of access end the session. On reloads and same-origin links, the outgoing page briefly places the configured field names and a browser-generated history entry ID in the tab’s Polymarket `sessionStorage`. The incoming page consumes that hint immediately so it can cover those fields while the worker checks the tab and supplies the adjustments. All amounts stay in extension storage.
 
 Closing Chrome clears session storage. The extension has no host permissions, external services, analytics, order-entry code or wallet integration. Uninstalling it deletes its local settings. The public privacy description is in [site/privacy](site/privacy/index.html).
 

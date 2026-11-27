@@ -1,5 +1,4 @@
-// The activeTab grant follows same-origin links. Keep an in-memory session
-// record so a new document can distinguish following a link from reloading.
+// Each enabled tab keeps its own settings across same-origin document changes.
 const origin = 'https://polymarket.com';
 const key = tabId => 'active:' + tabId;
 const queues = new Map();
@@ -78,7 +77,7 @@ async function follow(tabId, returningDocumentId) {
     [frame] = await chrome.scripting.executeScript({
       target: { tabId }, injectImmediately: true,
       func: async () => ({
-        origin: location.origin, navigation: performance.getEntriesByType('navigation')[0]?.type,
+        origin: location.origin,
         loaded: Boolean(globalThis.goylarpet?.tab),
         active: (await globalThis.goylarpet?.tab?.({ action: 'status' }))?.enabled
       })
@@ -93,12 +92,11 @@ async function follow(tabId, returningDocumentId) {
   if (!frame?.result || (returningDocumentId && frame.documentId !== returningDocumentId)) return false;
   const { documentId, result } = frame;
   const sameDocument = session.documentId === documentId;
-  if (result.origin !== origin || (!sameDocument && result.navigation === 'reload')) {
+  if (result.origin !== origin) {
     await endSession(tabId);
     return false;
   }
   if (sameDocument && result.active) return true;
-  if (!sameDocument && !result.navigation) return false;
   const target = { tabId, documentIds: [documentId] };
   if (!result.loaded) await chrome.scripting.executeScript({ target, injectImmediately: true, files });
   const resumed = await invoke(target, { action: 'resume', profile: session.profile });
@@ -121,14 +119,8 @@ chrome.tabs.onRemoved.addListener(tabId => {
 chrome.runtime.onMessage.addListener((message, sender, reply) => {
   if (message.action === 'document-start' && sender.origin === origin && sender.frameId === 0) {
     const tabId = sender.tab.id;
-    void inOrder(tabId, async () => {
-      const session = await readSession(tabId);
-      if (message.reload && session?.documentId !== sender.documentId) {
-        if (session) await endSession(tabId);
-        return null;
-      }
-      return session?.profile || null;
-    }).then(reply, () => reply(null));
+    void inOrder(tabId, async () => (await readSession(tabId))?.profile || null)
+      .then(reply, () => reply(null));
     return true;
   }
   if (message.action === 'page-returned' && sender.origin === origin && sender.frameId === 0) {
