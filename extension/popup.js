@@ -86,6 +86,7 @@ async function command(request) {
 }
 function unavailable(message) {
   target = null;
+  form.hidden = true;
   form.querySelector('fieldset').disabled = true;
   show({ enabled: false, error: message });
 }
@@ -107,6 +108,7 @@ async function initialize() {
   loadSettings(profile);
   form.querySelector('fieldset').disabled = false;
   show(state);
+  form.hidden = false;
 }
 async function apply(request) {
   if (busy) return;

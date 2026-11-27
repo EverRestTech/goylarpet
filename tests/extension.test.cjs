@@ -222,10 +222,13 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
     popup = await app.open(page);
     assert.match(await popup.text('#status'), /Open polymarket.com/);
     assert.equal(await popup.evaluate('document.querySelector("fieldset").disabled'), true);
+    assert.equal(await popup.evaluate('document.querySelector("#settings").getClientRects().length'), 0);
+    assert.doesNotMatch(await popup.evaluate('document.body.innerText'), /adjustments|time ranges|\(added\)/i);
     await popup.close();
     await page.goto('https://polymarket.com/portfolio?tab=returned');
     popup = await app.open(page);
     assert.equal(await popup.text('#mode'), 'Off');
+    assert.ok(await popup.evaluate('document.querySelector("#balance-help").getClientRects().length'));
     await expectText(page, portfolio, '$110');
     await popup.close();
   });

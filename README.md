@@ -4,7 +4,7 @@ goylarpet is a free parody extension for Polymarket in desktop Chrome. Enter an 
 
 ## Release status
 
-Version 0.5.0 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
+Version 0.5.1 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
 
 ## Run locally
 
