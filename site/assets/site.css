@@ -1,7 +1,8 @@
 :root {
   --ink: #1a1d19; --muted: #52594e; --paper: #fafaf6; --lime: #d6f88f; --line: #d7d9cf;
   color: var(--ink); background: var(--paper);
-  font: 16px/1.5 "Inter", "Helvetica Neue", Arial, sans-serif;
+  font: 16px/1.5 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: "tnum" 1, "cv02" 1, "cv03" 1, "cv04" 1;
   -webkit-font-smoothing: antialiased;
 }
 * { box-sizing: border-box; }
@@ -19,7 +20,7 @@ button { cursor: pointer; }
 .bar, .foot-row, .brand, nav, .button, .pair-heading { display: flex; align-items: center; }
 .bar, .foot-row { justify-content: space-between; gap: 1rem; }
 .bar { min-height: 72px; }
-.brand { gap: 8px; font-size: 23px; line-height: 1; font-weight: 750; letter-spacing: -.065em; }
+.brand { gap: 8px; font-size: 23px; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
 .brand img { display: block; }
 nav { gap: clamp(14px, 2.5vw, 32px); font-size: 14px; }
 nav a:hover, .card-link:hover { text-decoration: underline; text-underline-offset: 4px; }
@@ -27,8 +28,8 @@ nav a:hover, .card-link:hover { text-decoration: underline; text-underline-offse
 .nav-install span { color: var(--lime); margin-left: 4px; }
 .hero { display: grid; grid-template-columns: 1fr .9fr; align-items: center; gap: clamp(24px, 5vw, 80px); padding-block: clamp(28px, 4vw, 60px); }
 .hero-copy { padding-block: 12px; }
-.hero h1 { font-size: clamp(60px, 7.6vw, 112px); font-weight: 700; letter-spacing: -.08em; line-height: .98; }
-.hero h1 span { display: block; margin-top: 14px; font: 400 clamp(38px, 4.6vw, 68px)/1.04 "Instrument Serif", Georgia, serif; letter-spacing: -.052em; }
+.hero h1 { font-size: clamp(60px, 7.6vw, 112px); font-weight: 500; letter-spacing: -.07em; line-height: .96; }
+.hero h1 span { display: block; margin-top: 14px; font-size: clamp(38px, 4.6vw, 68px); line-height: 1.04; letter-spacing: -.055em; }
 .lead { margin-block: 24px 30px; max-width: 36ch; font-size: clamp(17px, 1.5vw, 21px); color: var(--muted); }
 .button { width: fit-content; min-height: 44px; justify-content: center; gap: 14px; border: 1px solid transparent; padding: 10px 18px; border-radius: 8px; font-size: 15px; font-weight: 620; text-align: center; }
 .lime { background: var(--lime); color: #1b2015; }
@@ -42,7 +43,7 @@ nav a:hover, .card-link:hover { text-decoration: underline; text-underline-offse
 .walkthrough h2 { margin-bottom: 14px; }
 .support-section { border-block: 1px solid var(--line); background: #edf1e6; scroll-margin-top: 18px; }
 .support-grid { display: grid; grid-template-columns: 1fr .9fr; gap: 5%; align-items: center; padding-block: clamp(30px, 4vw, 54px); }
-.support-heading h2, .walkthrough h2 { font-weight: 550; letter-spacing: -.055em; font-size: clamp(32px, 4vw, 52px); line-height: 1.04; }
+.support-heading h2, .walkthrough h2 { font-weight: 500; letter-spacing: -.055em; font-size: clamp(32px, 4vw, 52px); line-height: 1.04; }
 .support-heading p { margin-top: 10px; color: var(--muted); }
 .support-panel { min-width: 0; }
 #no-address { display: flex; align-items: center; gap: 13px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
@@ -52,7 +53,7 @@ nav a:hover, .card-link:hover { text-decoration: underline; text-underline-offse
 .selectors label { flex: 1 1 130px; min-width: 0; font-size: 13px; }
 select { width: 100%; display: block; margin-top: 5px; padding: 7px; border: 1px solid #a2ab9a; border-radius: 5px; color: var(--ink); background: var(--paper); }
 .pair-heading { gap: 8px; margin-block: 15px 8px; }
-#pair { font-size: 16px; }
+#pair { font-size: 16px; font-weight: 500; letter-spacing: -.03em; }
 #address { display: block; overflow-wrap: anywhere; }
 #send-note, #copy-status { font-size: 13px; }
 #send-note { margin-block: 6px 10px; }
@@ -62,15 +63,14 @@ select { width: 100%; display: block; margin-top: 5px; padding: 7px; border: 1px
 .foot nav { color: var(--muted); }
 .doc-page, .privacy { padding-block: clamp(42px, 7vw, 94px); }
 .doc-grid { display: grid; gap: 7%; grid-template-columns: 1fr 1fr; align-items: center; }
-.doc-intro h1, .prose h1 { font-size: clamp(40px, 5.6vw, 76px); line-height: 1.02; font-weight: 560; letter-spacing: -.065em; }
-.doc-intro em { font-family: Georgia, serif; }
+.doc-intro h1, .prose h1 { font-size: clamp(40px, 5.6vw, 76px); line-height: 1.02; font-weight: 500; letter-spacing: -.06em; }
 .release-status { margin-block: 24px; display: flex; align-items: center; gap: 9px; color: var(--muted); }
 .release-status i { width: 9px; height: 9px; border-radius: 50%; background: #8268a9; }
 .doc-card { padding: clamp(20px, 3vw, 38px); border-radius: 16px; background: #e9e3f1; }
-.doc-card h2, .prose h2 { font-size: 26px; letter-spacing: -.04em; }
+.doc-card h2, .prose h2 { font-size: 26px; font-weight: 500; letter-spacing: -.04em; }
 .install-steps { padding-left: 22px; }
 .install-steps li { padding-left: 4px; margin-block: 14px; }
-.install-steps h3 { font-size: 17px; }
+.install-steps h3 { font-size: 17px; font-weight: 500; letter-spacing: -.03em; }
 .card-link { display: inline-block; margin-top: 10px; text-decoration: underline; }
 .prose { max-width: 750px; }
 .prose p { margin-top: 12px; }
