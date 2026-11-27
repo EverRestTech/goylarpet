@@ -84,14 +84,17 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     }
     await page.goto(origin);
     const preview = page.locator('.preview img');
-    assert.equal(await preview.evaluate(img => img.complete && img.naturalWidth === 780), true);
+    assert.equal(await preview.evaluate(img => img.complete && img.naturalWidth === 712 && img.naturalHeight === 1196), true);
     assert.equal(await page.locator('canvas, #mechanics').count(), 0);
     assert.equal(await page.locator('#walkthrough').isVisible(), false);
     await page.getByRole('link', { name: 'Support the author' }).click();
     assert.equal(new URL(page.url()).hash, '#support');
     assert.equal(await page.locator('#donations').isVisible(), false);
     assert.equal(await page.locator('#no-address').isVisible(), true);
-    await page.getByRole('link', { name: 'Check Chrome Web Store availability' }).click();
+    const install = page.getByRole('link', { name: 'Install', exact: true });
+    assert.equal(await install.count(), 2);
+    assert.deepEqual(await install.evaluateAll(links => links.map(a => a.getAttribute('href'))), ['/download/', '/download/']);
+    await page.locator('.hero').getByRole('link', { name: 'Install', exact: true }).click();
     assert.equal(new URL(page.url()).pathname, '/download/');
     assert.equal(await page.locator('#store-link').isVisible(), false);
     assert.equal(await page.locator('#store-link').getAttribute('href'), null);

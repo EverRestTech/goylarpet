@@ -23,9 +23,9 @@ button { cursor: pointer; }
 .brand { gap: 8px; font-size: 23px; line-height: 1; font-weight: 600; letter-spacing: -.03em; }
 .brand img { display: block; }
 nav { gap: clamp(14px, 2.5vw, 32px); font-size: 14px; }
-nav a:hover, .card-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-.nav-install { background: var(--ink); color: white; border-radius: 2rem; padding: 8px 16px; }
-.nav-install span { color: var(--lime); margin-left: 4px; }
+nav a:hover, .nav-install:hover, .card-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.nav-install { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; background: var(--ink); color: white; border-radius: 2rem; padding: 8px 16px; }
+.nav-install span { color: var(--lime); }
 .hero { display: grid; grid-template-columns: 1fr .9fr; align-items: center; gap: clamp(24px, 5vw, 80px); padding-block: clamp(28px, 4vw, 60px); }
 .hero-copy { padding-block: 12px; }
 .hero h1 { font-size: clamp(60px, 7.6vw, 112px); font-weight: 500; letter-spacing: -.07em; line-height: .96; }
@@ -34,10 +34,8 @@ nav a:hover, .card-link:hover { text-decoration: underline; text-underline-offse
 .button { width: fit-content; min-height: 44px; justify-content: center; gap: 14px; border: 1px solid transparent; padding: 10px 18px; border-radius: 8px; font-size: 15px; font-weight: 620; text-align: center; }
 .lime { background: var(--lime); color: #1b2015; }
 .lime:hover { background: #c8f376; }
-.compat { margin-top: 12px; font-size: 13px; color: var(--muted); }
-.preview { display: grid; place-items: center; overflow: hidden; padding: clamp(14px, 2vw, 30px);
-  border-radius: 24px; background: radial-gradient(ellipse at 8% 5%, #efebf9, transparent 55%), linear-gradient(130deg, #e3def0 15%, #c6bbdf 75%, #b9afd0); }
-.preview img { display: block; width: min(100%, 326px); height: auto; border-radius: 12px; box-shadow: 0 17px 36px -16px #39334388; }
+.preview { display: grid; place-items: center; }
+.preview img { display: block; width: min(100%, 326px); height: auto; border-radius: 12px; box-shadow: 0 12px 30px -15px #1a1d193d; }
 .walkthrough { margin-bottom: 48px; }
 .walkthrough video { display: block; width: 100%; max-height: 75vh; background: #181a17; border-radius: 16px; }
 .walkthrough h2 { margin-bottom: 14px; }
@@ -83,12 +81,11 @@ select { width: 100%; display: block; margin-top: 5px; padding: 7px; border: 1px
   .brand { font-size: 19px; gap: 5px; }
   .brand img { width: 24px; height: 24px; }
   .bar nav { font-size: 12px; gap: 12px; }
-  .nav-install { padding: 7px 11px; }
+  .nav-install { font-size: 12px; padding: 7px 11px; }
   .hero, .doc-grid, .support-grid { grid-template-columns: minmax(0, 1fr); gap: 26px; }
   .hero-copy { padding: 0; }
   .hero h1 span { max-width: 14em; }
   .lead { margin-block: 16px 20px; }
-  .preview { padding: 18px 12px; }
   .foot-row { flex-wrap: wrap; }
   .permissions div { grid-template-columns: 1fr; gap: 3px; }
 }

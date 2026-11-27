@@ -7,7 +7,6 @@ if (listing) {
   for (const link of document.querySelectorAll('[data-install]')) {
     link.href = listing;
     link.hidden = false;
-    if (link.hasAttribute('data-install-label')) link.textContent = 'Install for Chrome';
   }
   const status = document.querySelector('#store-status');
   if (status) {
