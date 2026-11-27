@@ -47,12 +47,14 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .lead { margin-block: 24px 28px; max-width: 38ch; font-size: clamp(17px, 1.5vw, 21px); color: var(--muted); }
 .preview { display: grid; place-items: center; }
 .preview img { display: block; width: min(100%, 326px); height: auto; border-radius: 12px; outline: 1px solid var(--line); box-shadow: 0 22px 48px -16px #000c; }
-.preview figcaption { margin-top: 12px; font-size: 14px; color: var(--muted); }
 .comparison { border-top: 1px solid var(--line); padding-block: clamp(32px, 5vw, 64px); }
-.comparison-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 24px; }
 .parody-note, .shot-label { font: 600 12px/1.5 ui-monospace, monospace; letter-spacing: .06em; }
-.parody-note { color: var(--lime); }
-.comparison-grid, .all-time { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 3vw, 36px); }
+.parody-note { margin-bottom: 18px; color: var(--lime); }
+.comparison-grid { --gutter: clamp(10px, 2.5vw, 32px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.before { padding-inline-end: var(--gutter); }
+.after { padding-inline-start: var(--gutter); border-inline-start: 2px solid var(--control-line); }
+.comparison h2 { margin-bottom: clamp(12px, 2vw, 24px); font-size: clamp(32px, 4.5vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 600; }
+.after h2 { color: var(--lime); }
 .portfolio-shot { display: block; overflow: hidden; aspect-ratio: 3.1; background: var(--black); border: 1px solid var(--line); border-radius: 10px; cursor: zoom-in; }
 .portfolio-shot:hover { border-color: var(--lime); }
 /* Center both portfolio cards in the preview. The link opens the entire screenshot. */
@@ -60,7 +62,8 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .comparison figcaption { font-size: clamp(23px, 2.6vw, 36px); line-height: 1.1; font-weight: 550; letter-spacing: -.035em; }
 .comparison-grid figcaption { margin-top: 14px; }
 .shot-label { display: block; margin-bottom: 5px; color: var(--muted); }
-.all-time { align-items: center; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line); }
+.all-time { margin-top: clamp(20px, 3vw, 36px); }
+.all-time a { display: block; cursor: zoom-in; }
 .all-time img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 10px; }
 .all-time strong { display: block; font-weight: inherit; color: var(--lime); }
 .walkthrough { margin-bottom: 48px; }
@@ -68,7 +71,7 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .walkthrough h2 { margin-bottom: 14px; }
 .support-section { border-top: 1px solid var(--line); background: var(--panel); scroll-margin-top: 18px; }
 .support-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 5%; align-items: center; padding-block: clamp(34px, 4vw, 56px); }
-.support-heading h2, .walkthrough h2, .comparison h2 { font-weight: 500; letter-spacing: -.04em; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; }
+.support-heading h2, .walkthrough h2 { font-weight: 500; letter-spacing: -.04em; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; }
 .support-heading p { margin-top: 12px; color: var(--muted); }
 .support-panel { min-width: 0; border-left: 1px solid var(--line); padding-left: clamp(18px, 3vw, 40px); }
 #no-address { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
@@ -114,11 +117,9 @@ select { width: 100%; display: block; margin-top: 5px; padding: 8px; border: 1px
   .bar nav { font-size: 12px; gap: 12px; }
   .nav-install { min-height: 38px; font-size: 13px; padding: 7px 13px; }
   .hero, .doc-grid, .support-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .comparison-grid, .all-time { grid-template-columns: minmax(0, 1fr); }
-  .comparison-grid { gap: 24px; }
-  .portfolio-shot { aspect-ratio: 2.15; }
-  .portfolio-shot img { width: 285%; margin: -23% 0 0 -44.5%; }
-  .all-time { gap: 14px; margin-top: 24px; padding-top: 24px; }
+  .portfolio-shot { aspect-ratio: 2.4; }
+  .portfolio-shot img { width: 520%; margin: -48% 0 0 -87%; }
+  .comparison figcaption { font-size: clamp(17px, 4vw, 23px); }
   .hero h1 span { margin-top: 12px; }
   .lead { margin-block: 16px 20px; }
   .support-panel { border: 0; padding: 0; }

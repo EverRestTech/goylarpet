@@ -90,7 +90,7 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
       assert.ok(await img.evaluate(async el => {
         await el.decode();
         return el.naturalWidth === Number(el.getAttribute('width')) &&
-          el.naturalHeight === Number(el.getAttribute('height')) && !!el.closest('figure').querySelector('figcaption');
+          el.naturalHeight === Number(el.getAttribute('height'));
       }));
     }
     assert.equal(await page.locator('canvas, #mechanics').count(), 0);
@@ -108,6 +108,27 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     assert.equal(await page.locator('#store-link').getAttribute('href'), null);
     assert.match(await page.locator('#store-status').textContent(), /listing pending/);
     assert.equal(await page.locator('a[href$=".zip"]').count(), 0);
+  });
+
+  await t.test('Before and After sit above their screenshots and all-time profit stays on the right', async () => {
+    await page.goto(origin);
+    assert.equal(await page.locator('.preview figcaption').count(), 0);
+    const before = page.getByRole('region', { name: 'Before', exact: true });
+    const after = page.getByRole('region', { name: 'After', exact: true });
+    assert.equal(await before.locator('figcaption').count(), 1);
+    assert.equal(await after.locator('figcaption').count(), 2);
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 844 });
+      const left = await before.locator('.portfolio-shot').boundingBox();
+      const right = await after.locator('.portfolio-shot').boundingBox();
+      const profit = await after.locator('.all-time img').boundingBox();
+      const leftTitle = await before.getByRole('heading').boundingBox();
+      const rightTitle = await after.getByRole('heading').boundingBox();
+      assert.ok(leftTitle.y + leftTitle.height <= left.y && rightTitle.y + rightTitle.height <= right.y);
+      assert.ok(left.x + left.width < right.x && left.y === right.y);
+      assert.ok(profit.x === right.x && profit.y >= right.y + right.height);
+      assert.ok(await after.evaluate(el => parseFloat(getComputedStyle(el).borderInlineStartWidth) > 0));
+    }
   });
 
   await t.test('install links go directly to the listing when a public URL is configured', async () => {
