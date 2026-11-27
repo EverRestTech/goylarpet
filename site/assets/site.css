@@ -53,15 +53,15 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .after { padding-inline-start: var(--gutter); border-inline-start: 2px solid var(--control-line); }
 .comparison h2 { margin-bottom: clamp(12px, 2vw, 24px); font-size: clamp(32px, 4.5vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 600; }
 .after h2 { color: var(--lime); }
-.portfolio-shot { display: block; overflow: hidden; aspect-ratio: 3.1; background: var(--black); border: 1px solid var(--line); border-radius: 10px; cursor: zoom-in; }
-.portfolio-shot:hover { border-color: var(--lime); }
+.comparison figure > a { display: block; overflow: hidden; background: var(--black); border: 1px solid var(--line); border-radius: 10px; cursor: zoom-in; }
+.comparison figure > a:hover { border-color: var(--lime); }
+.portfolio-shot { aspect-ratio: 3.1; }
 /* Center both portfolio cards in the preview. The link opens the entire screenshot. */
 .portfolio-shot img { display: block; width: 143%; height: auto; margin: -11% 0 0 -21.5%; }
 .comparison figcaption { font-size: clamp(23px, 2.6vw, 36px); line-height: 1.1; font-weight: 550; letter-spacing: -.035em; }
 .comparison-grid figcaption { margin-top: 14px; }
 .all-time { margin-top: clamp(20px, 3vw, 36px); }
-.all-time a { display: block; cursor: zoom-in; }
-.all-time img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 10px; }
+.all-time img { width: 100%; height: auto; display: block; }
 .all-time strong { display: block; font-weight: inherit; color: var(--lime); }
 .walkthrough { margin-bottom: 48px; }
 .walkthrough video { display: block; width: 100%; max-height: 75vh; background: var(--black); border-radius: 12px; }

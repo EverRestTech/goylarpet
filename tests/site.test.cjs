@@ -118,19 +118,23 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     assert.equal(await before.locator('figcaption').count(), 1);
     assert.equal(await after.locator('figcaption').count(), 1);
     assert.equal(await after.locator('.all-time figcaption').innerText(),
-      'Six figures, zero positions\nNow I’m the richest larper alive\nSuck it, bitches');
+      'Now I’m the richest larper alive\nSuck it, bitches');
     assert.doesNotMatch(await page.locator('#before-and-after').innerText(), /All-time P&L|PARODY · NO REAL MONEY/);
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 844 });
       const left = await before.locator('.portfolio-shot').boundingBox();
       const right = await after.locator('.portfolio-shot').boundingBox();
-      const profit = await after.locator('.all-time img').boundingBox();
+      const profit = await after.locator('.all-time a').boundingBox();
       const leftTitle = await before.getByRole('heading').boundingBox();
       const rightTitle = await after.getByRole('heading').boundingBox();
       assert.ok(leftTitle.y + leftTitle.height <= left.y && rightTitle.y + rightTitle.height <= right.y);
       assert.ok(left.x + left.width < right.x && left.y === right.y);
       assert.ok(profit.x === right.x && profit.y >= right.y + right.height);
       assert.ok(await after.evaluate(el => parseFloat(getComputedStyle(el).borderInlineStartWidth) > 0));
+    }
+    for (const shot of await page.locator('#before-and-after figure > a').all()) {
+      await shot.hover();
+      assert.equal(await shot.evaluate(el => getComputedStyle(el).borderTop), '1px solid rgb(220, 255, 0)');
     }
   });
 
