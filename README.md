@@ -1,19 +1,17 @@
 # goylarpet
 
-In the timeline where I held.
-
 goylarpet is a free parody extension for Polymarket in desktop Chrome. Enter an amount to add to Portfolio, Cash or a chart period’s profit or loss in one tab. With a $900 adjustment, a real $100 balance displays as $1,000. If the site balance drops to $85, the display updates to $985.
 
 ## Release status
 
-Version 0.4.2 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
+Version 0.4.3 is a release candidate. Chrome Web Store submission is pending. Browser tests exercise the action popup, localized portfolios and the first frames of a chart or page transition. Verification against the signed-in portfolio is pending. The [installation page](https://goylarpet.pages.dev/download/) shows the current store status and will link to the approved listing.
 
 ## Run locally
 
 The extension and website use plain HTML, CSS and JavaScript. Both run directly from source.
 
 1. For extension development, open `chrome://extensions` in a development profile, enable Developer mode and use **Load unpacked** to select `extension/`.
-2. From the repository root, run `python3 -m http.server 4173 --bind 127.0.0.1 --directory site`. Visit `http://127.0.0.1:4173/` to see the simulator. The installation and privacy pages are at `/download/` and `/privacy/`.
+2. From the repository root, run `python3 -m http.server 4173 --bind 127.0.0.1 --directory site`. Visit `http://127.0.0.1:4173/` to preview the landing page. The installation and privacy pages are at `/download/` and `/privacy/`.
 
 When upgrading an unpacked build from 0.2.3 or earlier, click **Reload** on the goylarpet card in `chrome://extensions`, then refresh any portfolio tab where goylarpet was active. This removes the previous build’s page script. Reopen the popup and click **Enable in this tab** to use your saved settings.
 
@@ -70,8 +68,10 @@ This builds a reproducible `dist/goylarpet-<version>.zip` with `manifest.json` a
 
 Cloudflare Pages publishes the static files in `site/` to [goylarpet.pages.dev](https://goylarpet.pages.dev/) when changes reach `main` in `EverRestTech/goylarpet`. The project uses the repository root and has no build command. [Cloudflare GitHub integration](https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/)
 
-Set the approved public store listing in [the release links](site/assets/release.js) when available. Update the static status on the download page after submission or a review decision. Chrome Web Store handles installs and updates.
+Set the approved public store listing in [the release links](site/assets/release.js) to point every Install link straight to Chrome Web Store. The same file accepts an official X profile and an optional demo video path. Place a web-optimized H.264 MP4 under `site/assets/` and set `demoVideo` to its public path to show the player. Update the static status on the download page after submission or a review decision. Chrome Web Store handles installs and updates.
 
 Only the author’s confirmed receiving addresses belong in [the pair list](site/assets/pairs.js). Each entry has an independent address and confirmation flag. The browser tests select and copy all ten pairs using deliberately non-payable test strings served in memory.
+
+The locally hosted token illustrations come from [Cryptocurrency Icons](https://github.com/spothq/cryptocurrency-icons) (CC0).
 
 After the owner grants Search Console access, add the actual HTTPS origin as a URL-prefix property, place Google’s issued HTML verification file at the root of `site/`, deploy, verify and submit `sitemap.xml`.

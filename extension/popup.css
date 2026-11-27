@@ -39,3 +39,7 @@ button:disabled { opacity: .45; cursor: default; }
 #status { margin: 8px 0 0; color: #c4c9bf; font-size: 12px; }
 #status:empty { margin: 0; }
 #status.problem { color: #ffd79e; }
+
+footer { padding: 0 20px 12px; }
+.author-link { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border: 1px solid #494d44; border-radius: 6px; background: #222620; color: #d5edb2; font-weight: 550; text-decoration: none; }
+.author-link:hover { background: #2b3227; }

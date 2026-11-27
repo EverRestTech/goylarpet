@@ -10,8 +10,6 @@ A free Polymarket parody. Add an amount to Portfolio, Cash or any Profit/Loss pe
 
 **Description**
 
-In the timeline where I held.
-
 PARODY · NO REAL MONEY
 
 goylarpet gives your Polymarket portfolio a fictional balance in one desktop Chrome tab. Open your portfolio, click the extension and enter the amount to add to Portfolio, Cash or any of the six Profit/Loss periods. A negative entry subtracts from that field.
@@ -26,7 +24,7 @@ goylarpet is an independent parody. It has no affiliation with Polymarket. It ca
 Just for Fun. The listing and extension interface are in English. The extension reads translated portfolio labels, amounts and time ranges on supported pages. [Store category guidance](https://developer.chrome.com/docs/webstore/best-practices)
 
 **Website and privacy fields**  
-Use the verified production homepage and its `/privacy/` page after the Pages project is live.
+Use https://goylarpet.pages.dev/ for the homepage, https://goylarpet.pages.dev/privacy/ for privacy and https://github.com/EverRestTech/goylarpet/issues for user questions.
 
 ## Privacy disclosure and single purpose
 
@@ -47,9 +45,9 @@ The extension handles visible financial balance text locally. It transmits no us
 3. Close the popup and switch between the two periods. Check that each headline equals the site's original total plus the entry for that period. Move the pointer off the plot to read the current total, then explore historical points. The headline should hold its last confirmed total until the period’s actual total changes.
 4. Follow another Polymarket link in this tab. Supported header balances keep their offsets. A second tab starts with the mode off. Select **Disable** in the first tab to restore its latest site values.
 5. Reapply the values and reload the page. The mode is off. The popup remembers the last amounts locally and lets you apply them again.
-6. Run `npm test` from the source checkout to exercise gains, losses, locale changes and DOM replacements on synthetic pages. The website simulator also illustrates the $100 → $85 example.
+6. Run `npm test` from the source checkout to exercise gains, losses, locale changes and DOM replacements on synthetic pages.
 
-The 1280 × 800 listing image combines a capture of the actual enabled popup with a labelled synthetic balance display. The disclosure is visible at the top of the image. A 440 × 280 promotional tile carries the same disclosure. The 128 × 128 store icon is included in the ZIP. [Chrome Web Store image guidance](https://developer.chrome.com/docs/webstore/images)
+The 1280 × 800 listing image shows the enabled popup with synthetic adjustment amounts, the Support the author link and the parody disclosure. A 440 × 280 promotional tile carries the same disclosure. The 128 × 128 store icon is included in the ZIP. [Chrome Web Store image guidance](https://developer.chrome.com/docs/webstore/images)
 
 ## Launch copy for X
 

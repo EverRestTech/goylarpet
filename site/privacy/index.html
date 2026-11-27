@@ -6,10 +6,14 @@
   <meta name="description" content="How goylarpet handles visible Polymarket balances and profit or loss, stores settings locally and uses Chrome permissions">
   <link rel="canonical" href="https://goylarpet.pages.dev/privacy/">
   <link rel="icon" href="/assets/mark.png"><link rel="stylesheet" href="/assets/site.css">
+  <script type="module" src="/assets/release.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="mast"><div class="shell bar"><a class="brand" href="/"><img src="/assets/mark.png" width="32" height="32" alt="">goylarpet</a><nav aria-label="Main navigation"><a href="/#support">Support</a><a class="nav-install" href="/download/">Install <span aria-hidden="true">↗</span></a></nav></div></header>
+  <header class="mast"><div class="shell bar">
+    <a class="brand" href="/" aria-label="goylarpet home"><img src="/assets/mark.png" alt="" width="32" height="32">goylarpet</a>
+    <nav aria-label="Main navigation"><a href="/#support">Support the author</a><a class="nav-install" data-install href="/download/">Install <span aria-hidden="true">↗</span></a></nav>
+  </div></header>
   <main id="main" class="privacy light-section"><div class="shell prose">
     <h1>Privacy and permissions</h1>
     <p class="intro">goylarpet processes visible balance text on your device<br>The extension sends no data to the author, analytics services or any other server</p>
@@ -22,9 +26,17 @@
       <div><dt>storage</dt><dd>Keeps your last adjustments locally between sessions</dd></div>
     </dl>
     <h2>Accounts and payments</h2><p>Sign-in takes place on Polymarket<br>goylarpet does not access credentials, place orders, connect to wallets or transfer funds<br>Fictional balances affect the text you see in the enabled tab</p>
-    <h2>This website</h2><p>The portfolio simulator runs in your browser<br>The site sets no cookies and includes no analytics<br>Copy address copies the selected public receiving address to your clipboard<br>You initiate any voluntary transfer from your own wallet or exchange</p>
+    <h2>This website</h2><p>The site sets no cookies and includes no analytics<br>Copy address copies the selected public receiving address to your clipboard<br>You initiate any voluntary transfer from your own wallet or exchange</p>
     <a class="card-link" href="/download/">Installation guide <span aria-hidden="true">↗</span></a>
   </div></main>
-  <footer class="foot"><div class="shell foot-row"><a class="brand" href="/"><img src="/assets/mark.png" width="26" height="26" alt="">goylarpet</a><nav aria-label="Footer"><a href="https://github.com/EverRestTech/goylarpet">GitHub</a><a href="/#support">Support</a></nav></div></footer>
+  <footer class="foot"><div class="shell foot-row">
+    <a class="brand" href="/"><img src="/assets/mark.png" width="26" height="26" alt="">goylarpet</a>
+    <nav aria-label="Footer">
+      <a href="https://github.com/EverRestTech/goylarpet">GitHub</a>
+      <a href="https://github.com/EverRestTech/goylarpet/issues">Questions &amp; issues</a>
+      <a data-x hidden>X</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </div></footer>
 </body>
 </html>

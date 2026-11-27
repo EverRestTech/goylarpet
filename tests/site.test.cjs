@@ -51,7 +51,7 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
         const broken = [];
         for (const link of links) {
           const url = new URL(link.href || link.content);
-          if (url.href === repository) continue;
+          if (url.href === repository || url.href === repository + '/issues') continue;
           const response = await fetch(url);
           if (!response.ok) { broken.push(url.href); continue; }
           if (url.hash) {
@@ -74,7 +74,7 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     assert.deepEqual(seo.urls, Object.keys(pages).map(route => origin + route));
   });
 
-  await t.test('mobile layouts fit, simulator responds and install status matches the unpublished build', async () => {
+  await t.test('mobile layouts fit and the preview, donation link and store status are available', async () => {
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 844 });
       for (const route of Object.keys(pages)) {
@@ -83,19 +83,39 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
       }
     }
     await page.goto(origin);
-    await page.locator('#loss').click();
-    assert.equal(await page.locator('#fiction').textContent(), '$985');
-    await page.locator('#gain').click();
-    assert.equal(await page.locator('#fiction').textContent(), '$1,010');
-    assert.equal(await page.locator('#real').textContent(), '$110');
+    const preview = page.locator('.preview img');
+    assert.equal(await preview.evaluate(img => img.complete && img.naturalWidth === 780), true);
+    assert.equal(await page.locator('canvas, #mechanics').count(), 0);
+    assert.equal(await page.locator('#walkthrough').isVisible(), false);
+    await page.getByRole('link', { name: 'Support the author' }).click();
+    assert.equal(new URL(page.url()).hash, '#support');
     assert.equal(await page.locator('#donations').isVisible(), false);
     assert.equal(await page.locator('#no-address').isVisible(), true);
-    await page.getByRole('link', { name: 'Get goylarpet' }).click();
+    await page.getByRole('link', { name: 'Check Chrome Web Store availability' }).click();
     assert.equal(new URL(page.url()).pathname, '/download/');
     assert.equal(await page.locator('#store-link').isVisible(), false);
     assert.equal(await page.locator('#store-link').getAttribute('href'), null);
-    assert.match(await page.locator('#store-status').textContent(), /yet to be submitted/);
+    assert.match(await page.locator('#store-status').textContent(), /listing pending/);
     assert.equal(await page.locator('a[href$=".zip"]').count(), 0);
+  });
+
+  await t.test('install links go directly to the listing when a public URL is configured', async () => {
+    const mock = 'https://chromewebstore.google.com/detail/test-only/' + 'a'.repeat(32);
+    const source = await fs.readFile(path.join(directory, 'assets/release.js'), 'utf8');
+    await page.route('**/assets/release.js', route => route.fulfill({
+      contentType: 'application/javascript',
+      body: source.replace('const listing = null;', 'const listing = ' + JSON.stringify(mock) + ';')
+    }));
+    for (const route of Object.keys(pages)) {
+      await page.goto(origin + route);
+      const destinations = await page.locator('[data-install]').evaluateAll(links => links.map(link => link.href));
+      assert.ok(destinations.length && destinations.every(href => href === mock));
+      if (route === '/download/') {
+        assert.equal(await page.locator('#store-status').isVisible(), false);
+        assert.equal(await page.locator('#store-link').isVisible(), true);
+      }
+    }
+    await page.unroute('**/assets/release.js');
   });
 
   await t.test('all ten token/network combinations copy the selected receiving address only', async () => {
@@ -117,6 +137,7 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     let index = 0;
     for (const [token, networks] of Object.entries(expectedNetworks)) {
       await page.locator('#token').selectOption(token);
+      assert.equal(await page.locator('#token-logo').getAttribute('src'), '/assets/tokens/' + token.toLowerCase() + '.png');
       assert.deepEqual(await page.locator('#network option').allTextContents(), networks);
       for (const network of networks) {
         await page.locator('#network').selectOption(network);

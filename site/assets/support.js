@@ -9,6 +9,7 @@ if (available.length) {
 
   function showAddress() {
     const pair = current();
+    document.querySelector('#token-logo').src = '/assets/tokens/' + pair.token.toLowerCase() + '.png';
     document.querySelector('#pair').textContent = pair.asset + ' — ' + pair.network;
     document.querySelector('#address').textContent = pair.address;
     document.querySelector('#send-note').textContent = 'Send only ' + pair.token + ' on ' + pair.network + ' to this address';

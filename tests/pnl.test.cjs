@@ -81,7 +81,7 @@ test('each of the six Russian chart periods gets its own amount when four real t
     { text: 'Add your amount to the real Portfolio or Cash balance\n$100 (real) + $900 (added) = $1,000 (total)', lines: 2 },
     { text: 'Add your amount to the period’s real profit or loss\n$100 (real) + $900 (added) = $1,000 (total)', lines: 2 }
   ]);
-  assert.equal(await popup.evaluate('document.querySelector("footer")'), null);
+  assert.equal(await popup.text('footer .author-link'), 'Support the author ↗');
   const rects = await popup.evaluate('[...document.querySelectorAll("#ranges input")].map(el=>{const r=el.getBoundingClientRect();return [r.x,r.top,r.bottom,r.width]})');
   assert.equal(rects.length, 6);
   assert.ok(rects.every(([x,top,,width],i) => x === rects[0][0] && width === rects[0][3] && (!i || top >= rects[i-1][2])), 'Each period needs its own row');
