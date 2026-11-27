@@ -2,10 +2,10 @@ const { chromium } = require('playwright-core');
 const path = require('node:path');
 const { setTimeout: delay } = require('node:timers/promises');
 
-async function browser() {
+async function browser({ headless = true } = {}) {
   return chromium.launchPersistentContext('', {
     channel: 'chromium', executablePath: process.env.CHROME_FOR_TESTING || undefined,
-    headless: true, ignoreDefaultArgs: ['--disable-extensions'],
+    headless, ignoreDefaultArgs: ['--disable-extensions'],
     args: ['--enable-unsafe-extension-debugging', '--disable-background-networking', '--host-resolver-rules=MAP * ~NOTFOUND']
   });
 }

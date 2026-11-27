@@ -2,6 +2,7 @@
   "name": "goylarpet",
   "private": true,
   "scripts": {
+    "demo": "node scripts/demo.cjs",
     "test": "node --test --test-concurrency=1 tests/*.test.cjs",
     "package": "python3 scripts/package.py"
   },

@@ -25,6 +25,8 @@ npm test
 
 The tests launch a temporary Chrome profile, load the production manifest, open the actual action popup and fulfill portfolio navigations from a local fixture. DNS resolution is disabled in that profile. To use an existing Chrome for Testing binary, set `CHROME_FOR_TESTING` to its executable path.
 
+To record a demo, run `npm run demo` after the browser setup above. It opens a separate Chrome for Testing window with the extension and a local portfolio. Open goylarpet from the extensions menu, enter 900 under Portfolio and click **Enable in this tab**. Close the popup. Click **Simulate −$15**, then **Simulate +$25** to see $1,000 change to $985 and then $1,010. Use **Disable** to reveal the underlying $110. Close the recording tab when you finish.
+
 ## Using the popup
 
 Open Portfolio on Polymarket and click goylarpet. For Portfolio, Cash or any of the six Profit/Loss periods, enter the amount to add to the current site value. A negative entry subtracts from it. Leave a field empty to skip it, then click **Enable in this tab**.

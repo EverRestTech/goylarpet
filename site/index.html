@@ -26,8 +26,18 @@
     <section class="hero shell" aria-labelledby="product">
       <div class="hero-copy">
         <h1 id="product">goylarpet <span>— Polymarket Parody Portfolio</span></h1>
-        <p class="lead">Add a fictional amount to your balance or profit and loss in one Polymarket tab</p>
+        <p class="lead">Add a fictional amount to your balance or profit and loss. Your displayed total updates whenever the real one changes</p>
         <a class="nav-install" data-install href="/download/">Install <span aria-hidden="true">↗</span></a>
+        <table class="balance-example" id="balance-example">
+          <caption>One $900 adjustment, three balances</caption>
+          <thead><tr><td></td><th scope="col">Real balance</th><th scope="col">With goylarpet</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">At the start</th><td>$100</td><td>$1,000</td></tr>
+            <tr><th scope="row">After a $15 loss</th><td>$85</td><td>$985</td></tr>
+            <tr><th scope="row">After a $25 gain</th><td>$110</td><td>$1,010</td></tr>
+          </tbody>
+        </table>
+        <p class="session-note">The adjustment stays on as you browse Polymarket in this tab. After a full reload, click <b>Enable in this tab</b> to use it again</p>
       </div>
       <figure class="preview">
         <img src="/assets/popup.png" width="712" height="1196" alt="goylarpet popup showing balance adjustments, six profit and loss periods and the Support the author link">
