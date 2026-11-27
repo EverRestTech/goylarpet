@@ -83,8 +83,16 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
       }
     }
     await page.goto(origin);
-    const preview = page.locator('.preview img');
-    assert.equal(await preview.evaluate(img => img.complete && img.naturalWidth === 712 && img.naturalHeight === 1196), true);
+    const screenshots = page.locator('.preview img, #before-and-after img');
+    assert.equal(await screenshots.count(), 4);
+    for (const img of await screenshots.all()) {
+      await img.scrollIntoViewIfNeeded();
+      assert.ok(await img.evaluate(async el => {
+        await el.decode();
+        return el.naturalWidth === Number(el.getAttribute('width')) &&
+          el.naturalHeight === Number(el.getAttribute('height')) && !!el.closest('figure').querySelector('figcaption');
+      }));
+    }
     assert.equal(await page.locator('canvas, #mechanics').count(), 0);
     assert.equal(await page.locator('#walkthrough').isVisible(), false);
     await page.getByRole('link', { name: 'Support the author' }).click();
