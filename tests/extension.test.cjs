@@ -26,19 +26,21 @@ test('action popup, live balances and saved offsets in desktop Chromium', { time
   const submit = () => popup.click('button[type=submit]');
   const waitText = (selector, value) => until(async () => (await popup.text(selector)).includes(value), 'Popup should say ' + value);
 
-  await t.test('author link opens the donation section in a separate tab', async () => {
-    const destination = 'https://goylarpet.pages.dev/#support';
-    await context.route('https://goylarpet.pages.dev/', route => route.fulfill({ body: '<section id="support">Support the author</section>', contentType: 'text/html' }));
-    const opened = context.waitForEvent('page');
-    // The click closes Chrome's popup. Let the evaluation finish before navigating.
-    await popup.send('Runtime.evaluate', {
-      expression: "setTimeout(() => document.querySelector('.author-link').click(), 0)", userGesture: true
-    });
-    const author = await opened;
-    await author.waitForURL(destination);
-    assert.equal(page.url(), 'https://polymarket.com/portfolio?tab=one');
-    await author.close();
-    popup = await app.open(page);
+  await t.test('the logo and name open the homepage and Support the author opens its section', async () => {
+    const home = 'https://goylarpet.pages.dev/';
+    await context.route(home, route => route.fulfill({ body: '<section id="support">Support the author</section>', contentType: 'text/html' }));
+    for (const [selector, url] of [['.identity img', home], ['.identity span', home], ['.author-link', home + '#support']]) {
+      const opened = context.waitForEvent('page');
+      // The click closes Chrome's popup. Let the evaluation finish before navigating.
+      await popup.send('Runtime.evaluate', {
+        expression: `setTimeout(() => document.querySelector(${JSON.stringify(selector)}).click(), 0)`, userGesture: true
+      });
+      const website = await opened;
+      await website.waitForURL(url);
+      assert.equal(page.url(), 'https://polymarket.com/portfolio?tab=one');
+      await website.close();
+      popup = await app.open(page);
+    }
   });
 
   await t.test('adds the entered adjustment to each real copy and accepts zero', async () => {
