@@ -48,8 +48,6 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .preview { display: grid; place-items: center; }
 .preview img { display: block; width: min(100%, 326px); height: auto; border-radius: 12px; outline: 1px solid var(--line); box-shadow: 0 22px 48px -16px #000c; }
 .comparison { border-top: 1px solid var(--line); padding-block: clamp(32px, 5vw, 64px); }
-.parody-note, .shot-label { font: 600 12px/1.5 ui-monospace, monospace; letter-spacing: .06em; }
-.parody-note { margin-bottom: 18px; color: var(--lime); }
 .comparison-grid { --gutter: clamp(10px, 2.5vw, 32px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .before { padding-inline-end: var(--gutter); }
 .after { padding-inline-start: var(--gutter); border-inline-start: 2px solid var(--control-line); }
@@ -61,7 +59,6 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .portfolio-shot img { display: block; width: 143%; height: auto; margin: -11% 0 0 -21.5%; }
 .comparison figcaption { font-size: clamp(23px, 2.6vw, 36px); line-height: 1.1; font-weight: 550; letter-spacing: -.035em; }
 .comparison-grid figcaption { margin-top: 14px; }
-.shot-label { display: block; margin-bottom: 5px; color: var(--muted); }
 .all-time { margin-top: clamp(20px, 3vw, 36px); }
 .all-time a { display: block; cursor: zoom-in; }
 .all-time img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 10px; }

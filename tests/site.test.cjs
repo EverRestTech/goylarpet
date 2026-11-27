@@ -116,7 +116,10 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     const before = page.getByRole('region', { name: 'Before', exact: true });
     const after = page.getByRole('region', { name: 'After', exact: true });
     assert.equal(await before.locator('figcaption').count(), 1);
-    assert.equal(await after.locator('figcaption').count(), 2);
+    assert.equal(await after.locator('figcaption').count(), 1);
+    assert.equal(await after.locator('.all-time figcaption').innerText(),
+      'Six figures, zero positions\nNow I’m the richest larper alive\nSuck it, bitches');
+    assert.doesNotMatch(await page.locator('#before-and-after').innerText(), /All-time P&L|PARODY · NO REAL MONEY/);
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 844 });
       const left = await before.locator('.portfolio-shot').boundingBox();
