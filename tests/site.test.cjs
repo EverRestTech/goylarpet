@@ -148,9 +148,9 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
       assert.ok(profit.x === right.x && profit.y >= right.y + right.height);
       assert.ok(await after.evaluate(el => parseFloat(getComputedStyle(el).borderInlineStartWidth) > 0));
     }
-    for (const shot of await page.locator('#before-and-after figure > a').all()) {
-      await shot.hover();
-      assert.equal(await shot.evaluate(el => getComputedStyle(el).borderTop), '1px solid rgb(220, 255, 0)');
+    for (const media of await page.locator('.preview img, #before-and-after figure > a, #walkthrough video').all()) {
+      await media.hover();
+      assert.equal(await media.evaluate(el => getComputedStyle(el).borderTop), '1px solid rgb(220, 255, 0)');
     }
   });
 

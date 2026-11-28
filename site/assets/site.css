@@ -44,21 +44,22 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: clamp(30px, 5vw, 70px); padding-block: clamp(36px, 4vw, 66px); }
 .hero h1 { color: var(--lime); font-size: clamp(64px, 8.3vw, 116px); font-weight: 550; letter-spacing: -.05em; line-height: .92; }
 .lead { margin-block: 24px; max-width: 32ch; font-size: clamp(20px, 2.1vw, 29px); line-height: 1.25; letter-spacing: -.025em; text-wrap: pretty; }
-.hero-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 24px; margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); }
-.hero-details h2 { margin-bottom: 10px; font-size: 18px; line-height: 1.2; font-weight: 600; letter-spacing: -.025em; }
-.hero-details ul { margin: 0; padding-inline-start: 1em; color: var(--muted); font-size: 15px; line-height: 1.45; }
-.hero-details li + li { margin-top: 7px; }
-.hero-details li::marker { color: var(--lime); }
+.detail-row { display: grid; grid-template-columns: 2fr 3fr; gap: clamp(20px, 5vw, 64px); padding-block: clamp(28px, 4vw, 52px); border-top: 1px solid var(--line); }
+.detail-row h2 { text-wrap: balance; }
+.detail-row ul { margin: 0; padding-inline-start: 1.15em; max-width: 60ch; color: var(--muted); }
+.detail-row li + li { margin-top: 10px; }
+.detail-row li::marker { color: var(--lime); }
+.media-frame { border: 1px solid var(--line); }
+.media-frame:hover { border-color: var(--lime); }
 .preview { display: grid; place-items: center; }
-.preview img { display: block; width: min(100%, 326px); height: auto; border-radius: 12px; outline: 1px solid var(--line); box-shadow: 0 22px 48px -16px #000c; }
+.preview img { display: block; width: min(100%, 326px); height: auto; border-radius: 12px; box-shadow: 0 22px 48px -16px #000c; }
 .comparison { border-top: 1px solid var(--line); padding-block: clamp(32px, 5vw, 64px); }
 .comparison-grid { --gutter: clamp(10px, 2.5vw, 32px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .before { padding-inline-end: var(--gutter); }
 .after { padding-inline-start: var(--gutter); border-inline-start: 2px solid var(--control-line); }
 .comparison h2 { margin-bottom: clamp(12px, 2vw, 24px); font-size: clamp(32px, 4.5vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 600; }
 .after h2 { color: var(--lime); }
-.comparison figure > a { display: block; overflow: hidden; background: var(--black); border: 1px solid var(--line); border-radius: 10px; cursor: zoom-in; }
-.comparison figure > a:hover { border-color: var(--lime); }
+.comparison figure > a { display: block; overflow: hidden; background: var(--black); border-radius: 10px; cursor: zoom-in; }
 .portfolio-shot { aspect-ratio: 3.1; }
 /* Center both portfolio cards in the preview. The link opens the entire screenshot. */
 .portfolio-shot img { display: block; width: 143%; height: auto; margin: -11% 0 0 -21.5%; }
@@ -72,7 +73,7 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .walkthrough h2 { margin-bottom: 14px; }
 .support-section { border-top: 1px solid var(--line); background: var(--panel); scroll-margin-top: 18px; }
 .support-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 5%; align-items: center; padding-block: clamp(34px, 4vw, 56px); }
-.support-heading h2, .walkthrough h2 { font-weight: 500; letter-spacing: -.04em; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; }
+.detail-row h2, .support-heading h2, .walkthrough h2 { font-weight: 500; letter-spacing: -.04em; font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; }
 .support-heading p { margin-top: 12px; color: var(--muted); }
 .support-panel { min-width: 0; border-left: 1px solid var(--line); padding-left: clamp(18px, 3vw, 40px); }
 #no-address { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
@@ -118,6 +119,7 @@ select { width: 100%; display: block; margin-top: 5px; padding: 8px; border: 1px
   .bar nav { font-size: 12px; gap: 12px; }
   .nav-install { min-height: 38px; font-size: 13px; padding: 7px 13px; }
   .hero, .doc-grid, .support-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .detail-row { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .portfolio-shot { aspect-ratio: 2.4; }
   .portfolio-shot img { width: 520%; margin: -48% 0 0 -87%; }
   .comparison figcaption { font-size: clamp(17px, 4vw, 23px); }
