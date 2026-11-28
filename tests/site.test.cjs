@@ -96,13 +96,20 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     assert.equal(await page.locator('canvas, #mechanics').count(), 0);
     const demo = page.locator('#walkthrough video');
     assert.ok(await demo.isVisible());
+    await demo.scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => document.querySelector('#walkthrough video').src.startsWith('blob:'));
     assert.ok(await demo.evaluate(async video => {
       const poster = new Image();
       poster.src = video.poster;
       await poster.decode();
       await video.play();
       video.pause();
-      return video.controls && video.playsInline && video.videoWidth > 0 && video.duration > 0;
+      const target = video.duration * 0.75;
+      const seeked = new Promise(resolve => video.addEventListener('seeked', resolve, { once: true }));
+      video.currentTime = target;
+      await seeked;
+      return video.controls && video.playsInline && video.videoWidth > 0 &&
+        target > 0 && Math.abs(video.currentTime - target) < 0.1;
     }));
     await page.getByRole('link', { name: 'Support the author' }).click();
     assert.equal(new URL(page.url()).hash, '#support');
