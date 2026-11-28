@@ -32,18 +32,18 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
   const page = context.pages()[0];
   page.on('pageerror', error => errors.push(error.message));
   const pages = {
-    '/': 'goylarpet — Polymarket Parody Portfolio',
-    '/download/': 'Download goylarpet for Chrome',
-    '/privacy/': 'Privacy and permissions — goylarpet'
+    '/': { title: 'goylarpet — Polymarket Parody Portfolio', heading: 'goylarpet' },
+    '/download/': { title: 'Download goylarpet for Chrome', heading: 'Download goylarpet for Chrome' },
+    '/privacy/': { title: 'Privacy and permissions — goylarpet', heading: 'Privacy and permissions' }
   };
 
   await t.test('titles, canonical URLs, metadata, resources and linked anchors resolve', async () => {
     const descriptions = new Set();
-    for (const [route, title] of Object.entries(pages)) {
+    for (const [route, { title, heading }] of Object.entries(pages)) {
       await page.goto(origin + route);
       assert.equal(await page.title(), title);
       assert.equal(await page.locator('h1').count(), 1);
-      assert.equal(await page.locator('h1').textContent(), route === '/privacy/' ? 'Privacy and permissions' : title);
+      assert.equal(await page.locator('h1').textContent(), heading);
       assert.equal(await page.locator('[rel=canonical]').getAttribute('href'), origin + route);
       descriptions.add(await page.locator('[name=description]').getAttribute('content'));
       assert.equal(await page.getByRole('link', { name: 'GitHub', exact: true }).getAttribute('href'), repository);
