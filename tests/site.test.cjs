@@ -8,7 +8,7 @@ const origin = 'https://goylarpet.pages.dev';
 const repository = 'https://github.com/EverRestTech/goylarpet';
 const directory = path.resolve(__dirname, '../site');
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.png': 'image/png', '.svg': 'image/svg+xml',
-  '.xml': 'application/xml', '.txt': 'text/plain' };
+  '.xml': 'application/xml', '.txt': 'text/plain', '.mp4': 'video/mp4', '.jpg': 'image/jpeg' };
 
 test('static site, release links, SEO and donation clipboard', { timeout: 45000 }, async t => {
   const context = await browser();
@@ -94,7 +94,16 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
       }));
     }
     assert.equal(await page.locator('canvas, #mechanics').count(), 0);
-    assert.equal(await page.locator('#walkthrough').isVisible(), false);
+    const demo = page.locator('#walkthrough video');
+    assert.ok(await demo.isVisible());
+    assert.ok(await demo.evaluate(async video => {
+      const poster = new Image();
+      poster.src = video.poster;
+      await poster.decode();
+      await video.play();
+      video.pause();
+      return video.controls && video.playsInline && video.videoWidth > 0 && video.duration > 0;
+    }));
     await page.getByRole('link', { name: 'Support the author' }).click();
     assert.equal(new URL(page.url()).hash, '#support');
     assert.equal(await page.locator('#donations').isVisible(), false);

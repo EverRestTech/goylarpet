@@ -72,7 +72,7 @@ This builds a reproducible `dist/goylarpet-<version>.zip` with `manifest.json` a
 
 Cloudflare Pages publishes the static files in `site/` to [goylarpet.pages.dev](https://goylarpet.pages.dev/) when changes reach `main` in `EverRestTech/goylarpet`. The project uses the repository root and has no build command. [Cloudflare GitHub integration](https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/)
 
-Set the approved public store listing in [the release links](site/assets/release.js) to point every Install link straight to Chrome Web Store. The same file accepts an official X profile and an optional demo video path. Place a web-optimized H.264 MP4 under `site/assets/` and set `demoVideo` to its public path to show the player. Update the static status on the download page after submission or a review decision. Chrome Web Store handles installs and updates.
+Set the approved public store listing in [the release links](site/assets/release.js) to point every Install link straight to Chrome Web Store. The same file accepts an official X profile. The homepage demo uses `site/assets/video/demo.mp4` (H.264) and `site/assets/video/demo-poster.jpg`. Update the static status on the download page after submission or a review decision. Chrome Web Store handles installs and updates.
 
 Only the author’s confirmed receiving addresses belong in [the pair list](site/assets/pairs.js). Each entry has an independent address and confirmation flag. The browser tests select and copy all ten pairs using deliberately non-payable test strings served in memory.
 

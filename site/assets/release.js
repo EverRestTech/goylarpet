@@ -1,6 +1,5 @@
-// Fill these in when the public listing, demo file and official X profile are available.
+// Fill these in when the public listing and official X profile are available.
 const listing = null;
-const demoVideo = null;
 const xProfile = null;
 
 if (listing) {
@@ -13,12 +12,6 @@ if (listing) {
     status.hidden = true;
     document.querySelector('.doc-card h2').textContent = 'Getting started';
   }
-}
-
-const walkthrough = document.querySelector('#walkthrough');
-if (demoVideo && walkthrough) {
-  walkthrough.querySelector('video').src = demoVideo;
-  walkthrough.hidden = false;
 }
 
 if (xProfile) {
