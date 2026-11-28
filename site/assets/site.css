@@ -55,6 +55,8 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 .preview img { display: block; width: min(100%, 326px); height: auto; border-radius: 12px; box-shadow: 0 22px 48px -16px #000c; }
 .comparison { border-top: 1px solid var(--line); padding-block: clamp(32px, 5vw, 64px); }
 .comparison-grid { --gutter: clamp(10px, 2.5vw, 32px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.comparison-grid > section { display: grid; grid-row: span 4; grid-template-rows: subgrid; }
+.portfolio-comparison { display: grid; grid-row: span 2; grid-template-rows: subgrid; }
 .before { padding-inline-end: var(--gutter); }
 .after { padding-inline-start: var(--gutter); border-inline-start: 2px solid var(--control-line); }
 .comparison h2 { margin-bottom: clamp(12px, 2vw, 24px); font-size: clamp(32px, 4.5vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 600; }
@@ -64,7 +66,8 @@ nav a:hover, .card-link:hover { color: var(--lime); }
 /* Center both portfolio cards in the preview. The link opens the entire screenshot. */
 .portfolio-shot img { display: block; width: 143%; height: auto; margin: -11% 0 0 -21.5%; }
 .comparison figcaption { font-size: clamp(23px, 2.6vw, 36px); line-height: 1.1; font-weight: 550; letter-spacing: -.035em; }
-.comparison-grid figcaption { margin-top: 14px; }
+.portfolio-comparison figcaption { margin-bottom: 14px; }
+.all-time figcaption { margin-top: 14px; }
 .all-time { margin-top: clamp(20px, 3vw, 36px); }
 .all-time img { width: 100%; height: auto; display: block; }
 .all-time strong { display: block; font-weight: inherit; color: var(--lime); }

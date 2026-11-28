@@ -131,10 +131,11 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
     assert.equal(await page.locator('.preview figcaption').count(), 0);
     const before = page.getByRole('region', { name: 'Before', exact: true });
     const after = page.getByRole('region', { name: 'After', exact: true });
-    assert.equal(await before.locator('figcaption').count(), 1);
-    assert.equal(await after.locator('figcaption').count(), 1);
-    assert.equal(await after.locator('.all-time figcaption').innerText(),
-      'Now I’m the richest larper alive\nSuck it, bitches');
+    const beforeCaption = before.locator('.portfolio-comparison figcaption');
+    const afterCaption = after.locator('.portfolio-comparison figcaption');
+    assert.equal(await beforeCaption.innerText(), 'I was broke');
+    assert.equal(await afterCaption.innerText(), 'Now I’m the richest larper alive');
+    assert.equal(await after.locator('.all-time figcaption').innerText(), 'Suck it, bitches');
     assert.doesNotMatch(await page.locator('#before-and-after').innerText(), /All-time P&L|PARODY · NO REAL MONEY/);
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 844 });
@@ -143,7 +144,10 @@ test('static site, release links, SEO and donation clipboard', { timeout: 45000 
       const profit = await after.locator('.all-time a').boundingBox();
       const leftTitle = await before.getByRole('heading').boundingBox();
       const rightTitle = await after.getByRole('heading').boundingBox();
-      assert.ok(leftTitle.y + leftTitle.height <= left.y && rightTitle.y + rightTitle.height <= right.y);
+      const leftCaption = await beforeCaption.boundingBox();
+      const rightCaption = await afterCaption.boundingBox();
+      assert.ok(leftTitle.y + leftTitle.height <= leftCaption.y && leftCaption.y + leftCaption.height <= left.y);
+      assert.ok(rightTitle.y + rightTitle.height <= rightCaption.y && rightCaption.y + rightCaption.height <= right.y);
       assert.ok(left.x + left.width < right.x && left.y === right.y);
       assert.ok(profit.x === right.x && profit.y >= right.y + right.height);
       assert.ok(await after.evaluate(el => parseFloat(getComputedStyle(el).borderInlineStartWidth) > 0));
